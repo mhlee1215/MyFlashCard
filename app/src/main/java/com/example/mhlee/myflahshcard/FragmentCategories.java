@@ -47,7 +47,6 @@ public class FragmentCategories extends DefaultFragment {
 //        buttonFab.setColor(getResources().getColor(R.color.action_bar_color));
 //        buttonFab.setTextColor(getResources().getColor(R.color.action_bar_text_color));
 
-
         android.support.design.widget.FloatingActionButton fab = (android.support.design.widget.FloatingActionButton) view.findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
