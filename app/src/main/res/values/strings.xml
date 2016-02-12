@@ -12,5 +12,6 @@
         <item>@drawable/ic_subject</item>
         <item>@drawable/ic_settings</item>
     </array>
+    <string name="title_activity_main2">Main2Activity</string>
     <!-- End nav drawer stuff -->
 </resources>
