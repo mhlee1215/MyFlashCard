@@ -1,4 +1,4 @@
-package com.example.mhlee.myflahshcard;
+package com.example.mhlee.myflahshcard.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;

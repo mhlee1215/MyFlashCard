@@ -1,11 +1,15 @@
 package com.example.mhlee.myflahshcard;
 
 import android.app.Activity;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
+
+
 import android.support.v4.widget.DrawerLayout;
-import android.support.v4.app.ActionBarDrawerToggle;
+import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
@@ -46,27 +50,28 @@ public abstract class DrawerLayoutActivity extends AppCompatActivity {
 
         mDrawerList.setAdapter(getAdapter());
 
-
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout,
-                R.drawable.ic_navigation_drawer, // Nav drawer Icon
+                //R.drawable.ic_navigation_drawer, // Nav drawer Icon
                 R.string.app_name, // Nav drawer open - description for accessibility
                 R.string.app_name // Nav drawer close
         ) {
             @Override
             public void onDrawerOpened(View drawerView) {
-                getSupportActionBar().setTitle(mTitle);
+                getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
 
             @Override
             public void onDrawerClosed(View drawerView) {
-                getSupportActionBar().setTitle(mTitle);
+                getActionBar().setTitle(mTitle);
                 invalidateOptionsMenu();
             }
         };
         mDrawerLayout.setDrawerListener(mDrawerToggle);
 
-        if(savedInstanceState == null) {
+        if(savedInstanceState != null) {
+            restoreFragment(savedInstanceState);
+        } else if(savedInstanceState == null) {
             displayView(0, null);
         }
     }
@@ -131,6 +136,12 @@ public abstract class DrawerLayoutActivity extends AppCompatActivity {
     public abstract void displayView(int position, Bundle fragmentBundle);
 
     /**
+     *
+     * @param savedInstanceState
+     */
+    public abstract void restoreFragment(Bundle savedInstanceState);
+
+    /**
      * Any specific initializations should go here.
      */
     public abstract void init();
@@ -150,7 +161,7 @@ public abstract class DrawerLayoutActivity extends AppCompatActivity {
      *      The Activity layout for this drawer activity
      */
     private int getLayout() {
-       return R.layout.drawer_activity;
+        return R.layout.drawer_activity;
     }
 
     /**
@@ -188,4 +199,28 @@ public abstract class DrawerLayoutActivity extends AppCompatActivity {
      * @return
      */
     protected abstract BaseAdapter getAdapter();
+
+    /**
+     * Handy method to clear the back stack. We want to do this to avoid back stack bugs.
+     */
+    public void clearBackStack() {
+        FragmentManager manager = getFragmentManager();
+        if (manager.getBackStackEntryCount() > 0) {
+            FragmentManager.BackStackEntry first = manager.getBackStackEntryAt(0);
+            manager.popBackStack(first.getId(), FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        // If the back stack is empty we let android handle the back button
+        if(getFragmentManager().getBackStackEntryCount() == 0) {
+            super.onBackPressed();
+        } else {
+            // Otherwise we remove it from the back stack and the framework will handle the
+            // fragment change for us :)
+            getFragmentManager().popBackStack();
+            getActionBar().setTitle(mTitle);
+        }
+    }
 }

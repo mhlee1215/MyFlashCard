@@ -1,4 +1,4 @@
-package com.example.mhlee.myflahshcard;
+package com.example.mhlee.myflahshcard.fab;
 
 import android.animation.ObjectAnimator;
 import android.content.Context;
@@ -21,6 +21,8 @@ import android.view.WindowManager;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.Interpolator;
 import android.widget.Button;
+
+import com.example.mhlee.myflahshcard.R;
 
 
 /**

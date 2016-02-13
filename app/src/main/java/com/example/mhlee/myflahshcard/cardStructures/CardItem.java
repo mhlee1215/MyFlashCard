@@ -1,4 +1,4 @@
-package com.example.mhlee.myflahshcard;
+package com.example.mhlee.myflahshcard.cardStructures;
 
 // CardItem.java
 public abstract class CardItem {

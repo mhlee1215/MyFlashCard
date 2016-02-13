@@ -1,10 +1,13 @@
-package com.example.mhlee.myflahshcard;
+package com.example.mhlee.myflahshcard.fragments;
 
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.mhlee.myflahshcard.fab.FloatingActionButton;
+import com.example.mhlee.myflahshcard.R;
 
 import java.util.ArrayList;
 import java.util.List;
